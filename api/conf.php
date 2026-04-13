@@ -1,20 +1,18 @@
 <?php 
-    $host = getenv('DATABASE_HOST');
-    $username = getenv('DATABASE_USER');
-    $pass = getenv('DATABASE_PASS');
-    $nama_db = getenv('DATABASE_DB');
+   $conn = mysqli_init();
+    mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
+    mysqli_real_connect(
+        $conn,
+        $host,
+        $username,
+        $pass,
+        $nama_db,
+        3306,
+        NULL,
+        MYSQLI_CLIENT_SSL
+    );
 
-    try {
-        // Buat koneksi PDO ke MySQL
-        $pdo = new PDO("mysql:host=$host;dbname=$nama_db;charset=utf8mb4", $username, $pass);
-        
-        // Set mode error PDO ke exception
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        // echo "Koneksi berhasil!"; // Hanya untuk testing
-        
-    } catch (PDOException $e) {
-        // Hentikan proses jika koneksi gagal, tampilkan pesan error
-        die("Koneksi database gagal: " . $e->getMessage());
+    if (mysqli_connect_error()) {
+        die(json_encode(["status" => "gagal", "message" => "Koneksi DB gagal"]));
     }
 ?>
