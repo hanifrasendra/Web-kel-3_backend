@@ -13,9 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 $id = $_GET['id'];
 
-
-
-
 $result = mysqli_query($conn, "SELECT * FROM pengajuan where id = '$id'");
 $data   = mysqli_fetch_assoc($result);
 

@@ -4,19 +4,11 @@
     header("Access-Control-Allow-Headers: Content-Type");
     header("Content-Type: application/json");
 
+    include 'conf.php';
+
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         http_response_code(200);
         exit();
-    }
-
-    $host = getenv('DATABASE_HOST');
-    $username = getenv('DATABASE_USER');
-    $pass = getenv('DATABASE_PASS');
-    $nama_db = getenv('DATABASE_DB');
-
-    $conn = new mysqli($host, $username, $pass, $nama_db);
-    if ($conn->connect_error) {
-        die(json_encode(["status" => "gagal", "message" => "Koneksi DB gagal"]));
     }
 
     $input = json_decode(file_get_contents("php://input"), true);
@@ -38,7 +30,4 @@
             "message" => $statement->error
         ]);
     }
-
-
 ?>
-

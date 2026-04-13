@@ -1,22 +1,13 @@
 <?php
-    header("Access-Control-Allow-Origin: * ");
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json");
 
-    $host = getenv('DATABASE_HOST');
-    $username = getenv('DATABASE_USER');
-    $pass = getenv('DATABASE_PASS');
-    $nama_db = getenv('DATABASE_DB');
+    include 'conf.php';
 
-    $conn = new mysqli($host, $username, $pass, $nama_db);
-
-    if ($conn->connect_error) {
-        die(json_encode(["status" => "gagal", "message" => "Koneksi DB gagal"]));
-    }
-
-    $result = $conn->query("SELECT * FROM register_user");
-
+    $result = mysqli_query($conn, "SELECT * FROM register_user");
 
     $users = [];
-    while ($row = mysqli_fetch_array($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $users[] = $row;
     }
 
@@ -24,5 +15,4 @@
         "status" => "success",
         "data" => $users
     ]);
-
 ?>
