@@ -9,16 +9,25 @@
         exit();
     }
 
-    include 'conf.php';
+    $host = getenv('DATABASE_HOST');
+    $username = getenv('DATABASE_USER');
+    $pass = getenv('DATABASE_PASS');
+    $nama_db = getenv('DATABASE_DB');
+
+    $conn = new mysqli($host, $username, $pass, $nama_db);
+    if ($conn->connect_error) {
+        die(json_encode(["status" => "gagal", "message" => "Koneksi DB gagal"]));
+    }
 
     $input = json_decode(file_get_contents("php://input"), true);
     $nama = $input['nama'];
     $email = $input['email'];
     $password = $input['password'];
 
-    $statement = "INSERT INTO register_user (nama, email, password) VALUES ('$nama', '$email', '$password')";
+    $statement = $conn->prepare("INSERT INTO register_user (nama, email, password) VALUES (?, ?, ?)");
+    $statement->bind_param("sss", $nama, $email, $password);
 
-    if (mysqli_query($conn, $statement)) {
+    if ($statement->execute()) {
         echo json_encode([
             "status"  => "success",
             "message" => "Data berhasil ditambahkan"
@@ -26,7 +35,7 @@
     } else {
         echo json_encode([
             "status"  => "gagal",
-            "message" => mysqli_error($conn)
+            "message" => $statement->error
         ]);
     }
 
