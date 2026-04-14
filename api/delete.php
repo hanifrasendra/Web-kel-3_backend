@@ -22,9 +22,9 @@ if (!$id) {
 }
 
 $query = mysqli_query($conn, "DELETE FROM pengajuan where id = '$id'");
-$result = mysqli_query($conn, $query);
 
-if($result){
+
+if($query){
     echo json_encode([
         "status" => "success",
         "message" => "Data berhasil dihapus"
