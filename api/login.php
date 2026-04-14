@@ -32,7 +32,13 @@
 
     echo json_encode([
         "status"  => "success",
-        "message" => "Login berhasil!"
+        "message" => "Login berhasil!",
+        "isLogin" => true,
+        "user" => [
+            "id" => $user["id"],
+            "nama" => $user["nama"],
+            "email" => $user["email"],
+        ]
     ]);
 
 ?>

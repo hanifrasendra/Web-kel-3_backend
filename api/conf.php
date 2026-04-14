@@ -11,4 +11,5 @@ mysqli_real_connect($conn, $host, $username, $pass, $nama_db, $port, NULL, MYSQL
 
 if (mysqli_connect_error()) {
     die(json_encode(["status" => "gagal", "message" => "Koneksi DB gagal: " . mysqli_connect_error()]));
-}
+} 
+?>
