@@ -12,12 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $input = json_decode(file_get_contents("php://input"), true);
-echo json_encode([
-    "raw" => $raw
-]);
-exit();
 $id = $input['id'];
 
+$query = mysqli_query($conn, "DELETE FROM pengajuan where id = '$id'");
 if (!$id) {
     echo json_encode([
         "status" => "error",
@@ -25,10 +22,6 @@ if (!$id) {
     ]);
     exit();
 }
-
-$query = mysqli_query($conn, "DELETE FROM pengajuan where id = '$id'");
-
-
 if($query){
     echo json_encode([
         "status" => "success",
