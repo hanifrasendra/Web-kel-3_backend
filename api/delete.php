@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: * ");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Content-Type: application/json");
 
@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $input = json_decode(file_get_contents("php://input"), true);
+echo json_encode([
+    "raw" => $raw
+]);
+exit();
 $id = $input['id'];
 
 if (!$id) {
