@@ -21,7 +21,7 @@ if (!$id) {
     exit();
 }
 
-$query = mysqli_query($conn, "DELETE * FROM pengajuan where id = '$id'");
+$query = mysqli_query($conn, "DELETE FROM pengajuan where id = '$id'");
 $result = mysqli_query($conn, $query);
 
 if($result){
