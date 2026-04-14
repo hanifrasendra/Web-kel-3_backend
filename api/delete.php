@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $input = json_decode(file_get_contents("php://input"), true);
-$id = $_GET['id'];
+$id = $input['id'];
 
 if (!$id) {
     echo json_encode([
