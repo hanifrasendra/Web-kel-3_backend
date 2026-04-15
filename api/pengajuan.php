@@ -18,7 +18,10 @@
     $prodi = $input['prodi'];
     $semester = $input['semester'];
     $ipk = $input['ipk'];
-    $tipe_beasiswa = $input['tipeBeasiswa'];
+    $tipe_beasiswa = $input['tipe-beasiswa'];
+    $ukt = $input['ukt'];
+    
+    
 
     $statement = "INSERT INTO pengajuan (nama, deskripsi, universitas, prodi, semester, ipk, tipe_beasiswa) VALUES ('$nama', '$deskripsi', '$universitas', '$prodi', '$semester', '$ipk', '$tipe_beasiswa')";
 
